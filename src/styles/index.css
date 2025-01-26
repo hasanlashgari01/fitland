@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #fa541c;
+  --color-primary-900: #190803;
+  --color-primary-850: #4b1908;
+  --color-primary-700: #963211;
+  --color-primary-600: #e14c19;
+  --color-primary-400: #fb7649;
+  --color-primary-300: #fc9877;
+  --color-primary-150: #fdccbb;
+  --color-primary-50: #feeee8;
+  --color-secondary: #032340;
+  --color-secondary-900: #01070d;
+  --color-secondary-850: #010a13;
+  --color-secondary-700: #021526;
+  --color-secondary-400: #194165;
+  --color-secondary-300: #2f5f8a;
+  --color-secondary-150: #518cc1;
+  --color-secondary-50: #518cc1;
+  --color-secondary-10: #cfe8ff;
+  --color-secondary-0: #ebf5ff;
+  --color-white: #ffffff;
+  --error-800: #8a1513;
+  --error-500: #e53935;
+  --error-200: #faddca;
+  --warning-800: #995700;
+  --warning-500: #ffb300;
+  --warning-200: #fff3bf;
+  --success-800: #257028;
+  --success-500: #66bb6a;
+  --success-200: #d3eddd;
+  --info-800: #0f5894;
+  --info-500: #29b6f6;
+  --info-200: #c7f2fc;
+}
+
+@font-face {
+  font-family: IranSansX;
+  font-weight: 200;
+  src: url("../assets/fonts/IranSansX/IRANSansXFaNum-Light.woff2");
+}
+@font-face {
+  font-family: IranSansX;
+  font-weight: 400;
+  src: url("../assets/fonts/IranSansX/IRANSansXFaNum-Regular.woff2");
+}
+@font-face {
+  font-family: IranSansX;
+  font-weight: 500;
+  src: url("../assets/fonts/IranSansX/IRANSansXFaNum-DemoBold.woff2");
+}
+@font-face {
+  font-family: IranSansX;
+  font-weight: 700;
+  src: url("../assets/fonts/IranSansX/IRANSansXFaNum-Bold.woff2");
+}
+
+body {
+  font-family: IranSansX;
+  font-weight: 400;
+}
+
+@layer components {
+  .form-input {
+    @apply mt-2 w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none;
+  }
+}
+
+.image-fade-in {
+  animation: imageFadeIn 1s forwards 0.1s;
+}
+
+.logo-fade-in {
+  animation: logoFadeIn 1.5s forwards 0.5s;
+}
+
+@keyframes imageFadeIn {
+  0% {
+    opacity: 0%;
+  }
+
+  100% {
+    opacity: 25%;
+  }
+}
+
+@keyframes logoFadeIn {
+  0% {
+    opacity: 0%;
+    transform: translateY(20px) scale(0.9);
+  }
+  
+  100% {
+    opacity: 100%;
+    transform: translateY(0);
+  }
+}
