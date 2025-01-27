@@ -8,7 +8,7 @@ const useMe = () => {
   useEffect(() => {
     const getMe = async () => {
       setIsLoading(true);
-      const result = await httpService("/auth/me").then((res) => res.data);
+      const result = await httpService("/auth/me").then((response) => response.data);
       setIsLoading(false);
       setData(result);
     };

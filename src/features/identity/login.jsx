@@ -27,17 +27,18 @@ const Login = () => {
         })
         .catch((error) => toast.error(error.response.data.message));
     }
-    if (step === 2 && otp.length === 5) {
-      await httpService
-        .post("/auth/check-otp", { mobile: data.mobile, code: otp })
-        .then((response) => {
-          setCookie("accessToken", response.data.accessToken, 30);
-          toast.success(response.data.message);
-          navigate("/");
-        })
-        .catch((error) => toast.error(error.response.data.message));
+    if (step === 2) {
+      if (otp.length === 5) {
+        await httpService
+          .post("/auth/check-otp", { mobile: data.mobile, code: otp })
+          .then((response) => {
+            setCookie("accessToken", response.data.accessToken, 30);
+            toast.success(response.data.message);
+            navigate("/");
+          })
+          .catch((error) => toast.error(error.response.data.message));
+      } else toast.error("کد باید ۵ رقمی باشد");
     }
-    if (otp.length !== 5) toast.error("کد باید ۵ رقمی باشد");
   };
 
   const renderForms = () => {

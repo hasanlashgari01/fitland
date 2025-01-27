@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { httpService } from "../../core/http-service";
 import Otp from "./components/otp";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const [step, setStep] = useState(1);
@@ -20,15 +21,25 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     if (step === 1) {
-      const result = await httpService.post("/auth/register", data);
-      console.log("🚀 ~ onSubmit ~ result:", result);
-      result.status === 201 && setStep((prev) => prev + 1);
-    } else if (step === 2) {
-      const result = await httpService.post("/auth/check-otp", {
-        mobile: data.mobile,
-        code: otp,
-      });
-      if (result.status === 200) navigate("/login");
+      await httpService
+        .post("/auth/register", data)
+        .then((response) => {
+          console.log(response.data.otp);
+          toast.success(response.data.message);
+          setStep((prev) => prev + 1);
+        })
+        .catch((error) => toast.error(error.response.data.message));
+    }
+    if (step === 2) {
+      if (otp.length === 5) {
+        await httpService
+          .post("/auth/check-otp", { mobile: data.mobile, code: otp })
+          .then((response) => {
+            toast.success(response.data.message);
+            navigate("/login");
+          })
+          .catch((error) => toast.error(error.response.data.message));
+      } else toast.error("کد باید ۵ رقمی باشد");
     }
   };
 
