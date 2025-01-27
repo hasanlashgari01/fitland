@@ -1,11 +1,13 @@
-import { useForm } from "react-hook-form";
-import { Link } from "react-router";
-import Otp from "./components/otp";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router";
 import { httpService } from "../../core/http-service";
 import { setCookie } from "../../shared/cookie";
+import Otp from "./components/otp";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [otp, setOtp] = useState("");
   const {
@@ -16,15 +18,26 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     if (step === 1) {
-      const result = await httpService.post("/auth/login", data);
-      result.status === 200 && setStep((prev) => prev + 1);
-    } else if (step === 2) {
-      const result = await httpService.post("/auth/check-otp", {
-        mobile: data.mobile,
-        code: otp,
-      });
-      setCookie("accessToken", result.data.accessToken, 30);
+      await httpService
+        .post("/auth/login", data)
+        .then((response) => {
+          console.log(response.data.otp);
+          toast.success(response.data.message);
+          setStep((prev) => prev + 1);
+        })
+        .catch((error) => toast.error(error.response.data.message));
     }
+    if (step === 2 && otp.length === 5) {
+      await httpService
+        .post("/auth/check-otp", { mobile: data.mobile, code: otp })
+        .then((response) => {
+          setCookie("accessToken", response.data.accessToken, 30);
+          toast.success(response.data.message);
+          navigate("/");
+        })
+        .catch((error) => toast.error(error.response.data.message));
+    }
+    if (otp.length !== 5) toast.error("کد باید ۵ رقمی باشد");
   };
 
   const renderForms = () => {
