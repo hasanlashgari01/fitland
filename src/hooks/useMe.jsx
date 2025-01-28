@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { httpService } from "../core/http-service";
+import { httpInterceptedService } from "../core/http-service";
 
 const useMe = () => {
   const [data, setData] = useState(null);
@@ -8,7 +8,7 @@ const useMe = () => {
   useEffect(() => {
     const getMe = async () => {
       setIsLoading(true);
-      const result = await httpService("/auth/me").then((response) => response.data);
+      const result = await httpInterceptedService("/auth/me").then((response) => response.data);
       setIsLoading(false);
       setData(result);
     };
