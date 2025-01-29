@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "title": "روشن",
+    "value": "light"
+  },
+  {
+    "id": 2,
+    "title": "خودکار",
+    "value": "system"
+  },
+  {
+    "id": 3,
+    "title": "تیره",
+    "value": "dark"
+  }
+]
