@@ -48,7 +48,7 @@
   --color-dark-800: #0c0902;
   --color-dark-900: #000000;
 
-  --color-gray-50: #f7f7f7;
+  /* --color-gray-50: #f7f7f7;
   --color-gray-100: #ededed;
   --color-gray-200: #dfdfdf;
   --color-gray-300: #c8c8c8;
@@ -57,7 +57,7 @@
   --color-gray-700: #676767;
   --color-gray-800: #676767;
   --color-gray-900: #545454;
-  --color-gray-950: #363636;
+  --color-gray-950: #363636; */
 
   --color-light-50: #f5f5f6;
   --color-light-100: #e5e6e8;
@@ -118,6 +118,24 @@
   }
 }
 
+@layer utilities {
+  .btn {
+    @apply cursor-pointer rounded border border-gray-300 px-4 py-1.5 disabled:cursor-not-allowed dark:border-gray-700;
+  }
+
+  .delete-btn {
+    @apply cursor-pointer rounded bg-red-500 px-5 py-1.5 text-white disabled:cursor-not-allowed;
+  }
+
+  .accept-btn {
+    @apply cursor-pointer rounded bg-blue-500 px-5 py-1.5 text-white disabled:cursor-not-allowed;
+  }
+
+  .warning-btn {
+    @apply cursor-pointer rounded bg-yellow-500 px-5 py-1.5 text-white disabled:cursor-not-allowed;
+  }
+}
+
 @layer components {
   .form-input {
     @apply mt-2 w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none;
@@ -148,6 +166,25 @@
 
   .table-div {
     @apply border border-slate-300 px-4 py-3 text-slate-800 dark:border-slate-800 dark:text-slate-300;
+  }
+
+  .modal {
+    @apply absolute flex h-72 w-xs flex-col rounded-2xl sm:w-sm md:w-lg;
+    @apply inset-1/2 -translate-y-1/2 translate-x-1/2;
+    @apply bg-white dark:bg-gray-800 dark:text-white;
+  }
+
+  .dropdown {
+    @apply invisible absolute top-12 right-0 left-0 z-30 flex flex-col gap-1 overflow-hidden rounded-2xl py-0.5 opacity-0 shadow-lg;
+    @apply border border-gray-200 bg-white dark:border-gray-600 dark:bg-gray-700;
+  }
+
+  .dropdown-item {
+    @apply cursor-pointer px-4 py-2 transition-colors hover:bg-sky-200/50;
+  }
+
+  .dropdown-item--active {
+    @apply bg-sky-500 text-white hover:bg-sky-500 dark:hover:bg-sky-500;
   }
 }
 
