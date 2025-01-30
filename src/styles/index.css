@@ -141,14 +141,34 @@
   .pagination-btn {
     @apply flex size-10 cursor-pointer items-center justify-center rounded-lg transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-20;
   }
+
+  .table-header {
+    @apply border border-slate-300 bg-slate-200 px-4 py-3 dark:border-slate-800 dark:bg-slate-800;
+  }
+
+  .table-div {
+    @apply border border-slate-300 px-4 py-3 text-slate-800 dark:border-slate-800 dark:text-slate-300;
+  }
 }
 
-.image-fade-in {
-  animation: imageFadeIn 1s forwards 0.1s;
+.fade-in {
+  animation: fadeIn 1s forwards 0.1s;
 }
 
 .logo-fade-in {
   animation: logoFadeIn 1.5s forwards 0.5s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0%;
+    visibility: hidden;
+  }
+
+  100% {
+    opacity: 100%;
+    visibility: visible;
+  }
 }
 
 @keyframes imageFadeIn {
