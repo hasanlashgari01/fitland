@@ -5,6 +5,7 @@ import Modal from "../../components/modal";
 import Pagination from "../../components/pagination";
 import { useCategories, useDeleteCategory } from "../../hooks/useCategory";
 import CategoryItem from "./components/category-item";
+import NotFoundBox from "../../components/not-found-box";
 
 const CategoryList = ({ status }) => {
   const [searchParams] = useSearchParams();
@@ -48,9 +49,7 @@ const CategoryList = ({ status }) => {
             ))}
         </tbody>
       </table>
-      {data?.data?.length === 0 && (
-        <h1 className="rounded-xl bg-red-400 py-5 text-center text-2xl text-white">دسته بندی یافت نشد</h1>
-      )}
+      {data?.data?.length === 0 && <NotFoundBox />}
       {data.pagination.totalPage !== 0 && data.pagination.totalPage > 1 && <Pagination data={data} />}
       <Modal title="حذف" body="آیا از حذف این دسته اطمینان دارید؟" isOpen={showDeleteModal} onShow={setShowDeleteModal}>
         <button className="btn" onClick={() => setShowDeleteModal(false)}>
