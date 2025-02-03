@@ -62,7 +62,7 @@ const Login = () => {
                 />
               </div>
             </div>
-            <button className="bg-primary mt-8 w-full cursor-pointer rounded-lg py-3 text-white">تایید</button>
+            <button className="identity-btn">تایید</button>
             <p className="mt-8 text-xs">
               هنوز ثبت نام نکردی؟ <Link to="/register">ثبت نام</Link>
             </p>

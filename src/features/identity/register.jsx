@@ -77,7 +77,7 @@ const Register = () => {
                 />
               </div>
             </div>
-            <button className="bg-primary mt-8 w-full cursor-pointer rounded-lg py-3 text-white">تایید</button>
+            <button className="identity-btn">تایید</button>
             <div className="mt-8">
               <p className="text-xs">
                 ورود شما به معنای پذیرش شرایط <span className="text-secondary-300">فیت لند</span> و{" "}

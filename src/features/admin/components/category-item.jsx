@@ -2,7 +2,7 @@ import { HiArrowPath, HiOutlineEye, HiOutlineEyeSlash, HiOutlineTrash } from "re
 import { useToggleActiveCategory } from "../../../hooks/useCategory";
 import { cn } from "../../../shared/cn";
 
-const CategoryItem = ({ _id, name, slug, isActive, onShowModal, refetch }) => {
+const CategoryItem = ({ _id, name, slug, isActive, onShowModal, onShowForm, refetch }) => {
   const { mutate: toggleMutate } = useToggleActiveCategory();
 
   const toggleActiveHandler = () => {
@@ -21,7 +21,7 @@ const CategoryItem = ({ _id, name, slug, isActive, onShowModal, refetch }) => {
         <button className="cursor-pointer rounded bg-red-400 p-1 dark:bg-red-600" onClick={() => onShowModal(_id)}>
           <HiOutlineTrash size={20} />
         </button>
-        <button className="cursor-pointer rounded bg-amber-400 p-1 dark:bg-amber-600">
+        <button className="cursor-pointer rounded bg-amber-400 p-1 dark:bg-amber-600" onClick={() => onShowForm(_id)}>
           <HiArrowPath size={20} />
         </button>
         <button

@@ -1,20 +1,18 @@
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
 
-const Modal = ({ isOpen, onShow, title, body, children }) => {
-  const closeHandler = () => onShow(false);
-
+const Modal = ({ isOpen, cancelHandler, title, body, children }) => {
   return (
     <>
       {isOpen &&
         createPortal(
-          <div className="fixed inset-0 bg-slate-200/75 dark:bg-slate-600/75" onClick={closeHandler}>
+          <div className="modal-container" onClick={() => cancelHandler()}>
             <div className="modal" onClick={(e) => e.stopPropagation()}>
               <div className="flex items-center justify-between border-b border-slate-300 p-5 dark:border-slate-700">
                 <h4 className="title">{title}</h4>
                 <span
                   className="flex size-6 cursor-pointer items-center justify-center rounded border border-slate-300 dark:border-slate-700"
-                  onClick={closeHandler}
+                  onClick={() => cancelHandler()}
                 >
                   <HiXMark size={20} />
                 </span>

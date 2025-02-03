@@ -13,8 +13,17 @@ export const getCategoriesService = async ({ status, page }) => {
   }).then((res) => res.data);
 };
 
-export const deleteCategoryService = async (categoryId) =>
-  await httpInterceptedService.delete(`/admin/category/${categoryId}`).then((res) => res.data);
+export const deleteCategoryService = async (id) =>
+  await httpInterceptedService.delete(`/admin/category/${id}`).then((res) => res.data);
 
-export const toggleActiveCategoryService = async (categoryId) =>
-  await httpInterceptedService.patch(`/admin/category/${categoryId}`).then((res) => res.data);
+export const toggleActiveCategoryService = async (id) =>
+  await httpInterceptedService.patch(`/admin/category/${id}`).then((res) => res.data);
+
+export const updateCategoryService = async ({ id, data }) =>
+  await httpInterceptedService.put(`/admin/category/${id}`, data).then((res) => res.data);
+
+export const createCategoryService = async (data) =>
+  await httpInterceptedService.post(`/admin/category`, data).then((res) => res.data);
+
+export const getCategoryService = async (id) =>
+  await httpInterceptedService(`/admin/category/${id}`).then((res) => res.data);

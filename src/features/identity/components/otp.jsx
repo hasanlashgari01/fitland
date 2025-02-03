@@ -36,7 +36,7 @@ const Otp = ({ otp, setOtp, setStep, time = 5 }) => {
         <span>ارسال دوباره</span>
         <span>{timer}</span>
       </div>
-      <button className="bg-primary mt-8 w-full cursor-pointer rounded-lg py-3 text-white">ثبت</button>
+      <button className="identity-btn">ثبت</button>
       <div className="mt-8 text-sm">
         <span className="cursor-pointer" onClick={() => setStep((prev) => prev - 1)}>
           صفحه قبلی
