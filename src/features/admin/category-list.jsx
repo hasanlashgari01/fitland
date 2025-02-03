@@ -1,13 +1,16 @@
 import { useState } from "react";
-import Loading from "../../../components/loading";
-import Modal from "../../../components/modal";
-import { useCategories, useDeleteCategory } from "../../../hooks/useCategory";
-import CategoryItem from "./category-item";
+import { useSearchParams } from "react-router";
+import Loading from "../../components/loading";
+import Modal from "../../components/modal";
+import Pagination from "../../components/pagination";
+import { useCategories, useDeleteCategory } from "../../hooks/useCategory";
+import CategoryItem from "./components/category-item";
 
 const CategoryList = ({ status }) => {
+  const [searchParams] = useSearchParams();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const { data, isLoading, refetch } = useCategories(status);
+  const { data, isLoading, refetch } = useCategories(status, searchParams.get("page"));
   const { mutate: deleteMutate } = useDeleteCategory();
 
   if (isLoading) {
@@ -30,20 +33,25 @@ const CategoryList = ({ status }) => {
   return (
     <>
       <table className="mt-8 table w-full border-collapse border-slate-400 text-right dark:border-slate-800">
-        <tr>
-          <th className="table-header">عنوان</th>
-          <th className="table-header">اسلاگ</th>
-          <th className="table-header">وضعیت</th>
-          <th className="table-header"></th>
-        </tr>
-        {data.data.length !== 0 &&
-          data.data.map((category) => (
-            <CategoryItem key={category._id} {...category} onShowModal={showModalHandler} refetch={refetch} />
-          ))}
+        <thead>
+          <tr>
+            <th className="table-header">عنوان</th>
+            <th className="table-header">اسلاگ</th>
+            <th className="table-header">وضعیت</th>
+            <th className="table-header">عملیات</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data?.data?.length !== 0 &&
+            data?.data?.map((category) => (
+              <CategoryItem key={category._id} {...category} onShowModal={showModalHandler} refetch={refetch} />
+            ))}
+        </tbody>
       </table>
-      {data.data.length === 0 && (
+      {data?.data?.length === 0 && (
         <h1 className="rounded-xl bg-red-400 py-5 text-center text-2xl text-white">دسته بندی یافت نشد</h1>
       )}
+      {data.pagination.totalPage !== 0 && data.pagination.totalPage > 1 && <Pagination data={data} />}
       <Modal title="حذف" body="آیا از حذف این دسته اطمینان دارید؟" isOpen={showDeleteModal} onShow={setShowDeleteModal}>
         <button className="btn" onClick={() => setShowDeleteModal(false)}>
           انصراف

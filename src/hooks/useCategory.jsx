@@ -1,10 +1,10 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { deleteCategoryService, getCategoriesService, toggleActiveCategoryService } from "../services/category";
 
-export const useCategories = (status) =>
+export const useCategories = (status, page) =>
   useQuery({
-    queryKey: ["categories", status],
-    queryFn: () => getCategoriesService(status),
+    queryKey: ["categories", status, page],
+    queryFn: () => getCategoriesService({ status, page }),
   });
 
 export const useDeleteCategory = () =>

@@ -1,10 +1,10 @@
 import { httpInterceptedService } from "../core/http-service";
 
-export const getProductsService = async (page, limit = import.meta.env.VITE_PAGE_LIMIT) => {
+export const getProductsService = async (page) => {
   return await httpInterceptedService("/admin/products", {
     params: {
       page,
-      limit,
+      limit: import.meta.env.VITE_PAGE_LIMIT,
     },
   }).then((res) => res.data);
 };

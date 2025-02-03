@@ -8,7 +8,7 @@ const SidebarProfile = () => {
       <div className="size-10 overflow-hidden rounded-full">
         <img src={data?.avatar || "/public/avatar.png"} alt="" className="size-full" />
       </div>
-      <span>{!isLoading && data.fullName}</span>
+      <span className="dark:text-white">{!isLoading && data.fullName}</span>
     </div>
   );
 };

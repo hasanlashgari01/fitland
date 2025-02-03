@@ -7,7 +7,7 @@ import { useProducts } from "../hooks/useProduct";
 
 const AdminProductsPage = () => {
   const [searchParams] = useSearchParams();
-  const { data, isLoading } = useProducts();
+  const { data, isLoading } = useProducts(searchParams.get("page"));
 
   if (!isLoading && data.pagination.totalPage < searchParams.get("page")) {
     return <h1>یافت نشد</h1>;
