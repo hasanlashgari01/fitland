@@ -17,13 +17,13 @@ export const useCategories = (status, page) =>
 export const useDeleteCategory = () =>
   useMutation({
     mutationKey: ["delete-category"],
-    mutationFn: (categoryId) => deleteCategoryService(categoryId),
+    mutationFn: (id) => deleteCategoryService(id),
   });
 
 export const useToggleActiveCategory = () =>
   useMutation({
     mutationKey: ["toggle-category"],
-    mutationFn: (categoryId) => toggleActiveCategoryService(categoryId),
+    mutationFn: (id) => toggleActiveCategoryService(id),
   });
 
 export const useUpdateCategory = () =>
@@ -38,8 +38,8 @@ export const useCreateCategory = () =>
     mutationFn: (data) => createCategoryService(data),
   });
 
-export const useCategory = (categoryId) =>
+export const useCategory = (id) =>
   useQuery({
     queryKey: ["category"],
-    queryFn: () => getCategoryService(categoryId),
+    queryFn: () => getCategoryService(id),
   });

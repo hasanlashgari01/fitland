@@ -45,7 +45,7 @@ const CategoryList = ({ status, isShowForm, setIsShowForm }) => {
 
   return (
     <>
-      <table className="mt-8 table w-full border-collapse border-slate-400 text-right dark:border-slate-800">
+      <table className="table-container mt-8">
         <thead>
           <tr>
             <th className="table-header">عنوان</th>

@@ -18,16 +18,16 @@ const CategoryItem = ({ _id, name, slug, isActive, onShowModal, onShowForm, refe
       <td className="table-div">{slug}</td>
       <td className="table-div">{isActive ? "فعال" : "غیرفعال"}</td>
       <td className="table-div flex gap-4">
-        <button className="cursor-pointer rounded bg-red-400 p-1 dark:bg-red-600" onClick={() => onShowModal(_id)}>
+        <button className="action-btn bg-red-500 dark:bg-red-600" onClick={() => onShowModal(_id)}>
           <HiOutlineTrash size={20} />
         </button>
-        <button className="cursor-pointer rounded bg-amber-400 p-1 dark:bg-amber-600" onClick={() => onShowForm(_id)}>
+        <button className="action-btn bg-amber-500 dark:bg-amber-600" onClick={() => onShowForm(_id)}>
           <HiArrowPath size={20} />
         </button>
         <button
-          className={cn("cursor-pointer rounded p-1 transition-colors", {
-            "bg-teal-400 dark:bg-teal-600": isActive,
-            "bg-teal-400/50 dark:bg-teal-600/50": !isActive,
+          className={cn("action-btn", {
+            "bg-teal-500 dark:bg-teal-600": isActive,
+            "bg-teal-500/50 dark:bg-teal-600/50": !isActive,
           })}
           onClick={toggleActiveHandler}
         >
