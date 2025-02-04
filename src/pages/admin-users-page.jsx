@@ -1,6 +1,5 @@
 import Loading from "../components/loading";
 import Modal from "../components/modal";
-import NotFoundBox from "../components/not-found-box";
 import Pagination from "../components/pagination";
 import { usePage } from "../context/admin-page-context";
 import UserList from "../features/admin/user-list";
@@ -18,7 +17,6 @@ const AdminUsersPage = () => {
   return (
     <>
       <UserList data={data} />
-      <NotFoundBox data={data.data} value="کاربر" />
       <Pagination data={data} />
       <Modal title="بن" body="آیا از بن کاربر اطمینان دارید؟" isOpen={isModal} cancelHandler={cancelHandler}>
         <button className="btn" onClick={cancelHandler}>

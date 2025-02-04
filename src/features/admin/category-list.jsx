@@ -33,8 +33,8 @@ const CategoryList = ({ status }) => {
               data?.data?.map((category) => <CategoryItem key={category._id} refetch={refetch} {...category} />)}
           </tbody>
         </table>
+        <NotFoundBox data={data.data} value="دسته بندی" />
       </div>
-      <NotFoundBox data={data.data} value="دسته بندی" />
       <Pagination data={data} />
       {isForm && <CategoryForm refetch={refetch} />}
       <Modal title="حذف" body="آیا از حذف این دسته اطمینان دارید؟" isOpen={isModal} cancelHandler={cancelHandler}>

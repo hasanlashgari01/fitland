@@ -4,13 +4,18 @@ import { IoBan } from "react-icons/io5";
 import { usePage } from "../../../context/admin-page-context";
 import { cn } from "../../../shared/cn";
 
-const UserItem = ({ _id, fullName, mobile, email, role, verifyMobile, createdAt }) => {
+const BanItem = ({ user, mobile, createdAt }) => {
+  const { fullName, role, verifyMobile } = user;
   const { showModalHandler } = usePage();
 
   const d = new Date(createdAt);
 
   return (
-    <tr className={cn("fade-in opacity-0", { "bg-amber-100/75 dark:bg-amber-500/50": role === "ADMIN" })}>
+    <tr
+      className={cn("fade-in opacity-0", {
+        "bg-amber-100/75 dark:bg-amber-500/50": role === "ADMIN",
+      })}
+    >
       <td className="table-div">{fullName}</td>
       <td className="table-div">
         <div className="flex gap-10">
@@ -18,10 +23,9 @@ const UserItem = ({ _id, fullName, mobile, email, role, verifyMobile, createdAt 
           {verifyMobile && <HiCheckCircle size={24} className="fill-secondary-500" />}
         </div>
       </td>
-      <td className="table-div">{email ? email : "-----"}</td>
       <td className="table-div">{d.toLocaleDateString("fa-IR")}</td>
       <td className="table-div flex gap-4">
-        <button className="action-btn bg-red-500 dark:bg-red-600" onClick={() => showModalHandler(_id)}>
+        <button className="action-btn bg-red-500 dark:bg-red-600" onClick={() => showModalHandler(user._id)}>
           <IoBan size={20} />
         </button>
         {role === "USER" ? (
@@ -37,5 +41,4 @@ const UserItem = ({ _id, fullName, mobile, email, role, verifyMobile, createdAt 
     </tr>
   );
 };
-
-export default UserItem;
+export default BanItem;
