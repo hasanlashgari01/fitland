@@ -40,6 +40,6 @@ export const useCreateCategory = () =>
 
 export const useCategory = (id) =>
   useQuery({
-    queryKey: ["category"],
+    queryKey: ["category", id],
     queryFn: () => getCategoryService(id),
   });

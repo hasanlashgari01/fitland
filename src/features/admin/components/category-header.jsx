@@ -7,11 +7,11 @@ const data = [
   { id: 3, title: "غیرفعال", value: 0 },
 ];
 
-const CategoryHeader = ({ status, setStatus, setIsShowForm }) => {
+const CategoryHeader = ({ status, setStatus }) => {
   return (
     <div className="flex items-center justify-between">
       <Dropdown data={data} status={status} setStatus={setStatus} />
-      <Button status="add" title="دسته بندی" action={() => setIsShowForm(true)} />
+      <Button status="add" title="دسته بندی" />
     </div>
   );
 };

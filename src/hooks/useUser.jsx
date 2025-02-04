@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { getUsersBanService, getUsersService, toggleBanService } from "../services/user";
 
 export const useUsers = (page) =>
@@ -14,7 +14,7 @@ export const useBanUsers = (page) =>
   });
 
 export const useToggleBanUser = () =>
-  useQuery({
-    queryKey: ["toggle-ban"],
-    queryFn: (id) => toggleBanService(id),
+  useMutation({
+    mutationKey: ["toggle-ban"],
+    mutationFn: (id) => toggleBanService(id),
   });

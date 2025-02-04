@@ -17,4 +17,5 @@ export const getUsersBanService = async ({ page }) =>
     },
   }).then((res) => res.data);
 
-export const toggleBanService = async (id) => await httpInterceptedService(`/admin/ban/${id}`).then((res) => res.data);
+export const toggleBanService = async (id) =>
+  await httpInterceptedService.patch(`/admin/ban/${id}`).then((res) => res.data);

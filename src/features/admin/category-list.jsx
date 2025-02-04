@@ -1,85 +1,47 @@
-import { useState } from "react";
-import { useSearchParams } from "react-router";
 import Loading from "../../components/loading";
 import Modal from "../../components/modal";
 import NotFoundBox from "../../components/not-found-box";
 import Pagination from "../../components/pagination";
+import { usePage } from "../../context/admin-page-context";
 import { useCategories, useDeleteCategory } from "../../hooks/useCategory";
 import CategoryForm from "./components/category-form";
 import CategoryItem from "./components/category-item";
 
-const CategoryList = ({ status, isShowForm, setIsShowForm }) => {
-  const [searchParams] = useSearchParams();
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const { data, isLoading, refetch } = useCategories(status, searchParams.get("page"));
+const CategoryList = ({ status }) => {
+  const { page, isForm, isModal, cancelHandler, deleteHandler } = usePage();
+  const { data, isLoading, refetch } = useCategories(status, page);
   const { mutate: deleteMutate } = useDeleteCategory();
 
   if (isLoading) {
     return <Loading />;
   }
 
-  const showModalHandler = (categoryId) => {
-    setSelectedCategory(categoryId);
-    setShowDeleteModal(true);
-  };
-
-  const showFormModalHandler = (categoryId) => {
-    setSelectedCategory(categoryId);
-    setIsShowForm(true);
-  };
-
-  const deleteHandler = () => {
-    deleteMutate(selectedCategory);
-    setShowDeleteModal(false);
-    setTimeout(() => {
-      refetch();
-    }, 100);
-  };
-
-  const cancelHandler = () => {
-    setSelectedCategory(null);
-    setShowDeleteModal(false);
-    setIsShowForm(false);
-  };
-
   return (
     <>
-      <table className="table-container mt-8">
-        <thead>
-          <tr>
-            <th className="table-header">عنوان</th>
-            <th className="table-header">اسلاگ</th>
-            <th className="table-header">وضعیت</th>
-            <th className="table-header">عملیات</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data?.data?.length !== 0 &&
-            data?.data?.map((category) => (
-              <CategoryItem
-                key={category._id}
-                {...category}
-                onShowModal={showModalHandler}
-                onShowForm={showFormModalHandler}
-                refetch={refetch}
-              />
-            ))}
-        </tbody>
-      </table>
-      {data?.data?.length === 0 && <NotFoundBox />}
-      {data.pagination.totalPage !== 0 && data.pagination.totalPage > 1 && <Pagination data={data} />}
-      {isShowForm && <CategoryForm cancelHandler={cancelHandler} id={selectedCategory} refetch={refetch} />}
-      <Modal
-        title="حذف"
-        body="آیا از حذف این دسته اطمینان دارید؟"
-        isOpen={showDeleteModal}
-        cancelHandler={cancelHandler}
-      >
+      <div className="h-[73dvh]">
+        <table className="table-container mt-8">
+          <thead>
+            <tr>
+              <th className="table-header">عنوان</th>
+              <th className="table-header">اسلاگ</th>
+              <th className="table-header">وضعیت</th>
+              <th className="table-header">عملیات</th>
+            </tr>
+          </thead>
+          <tbody className="fade-in">
+            {data?.data?.length !== 0 &&
+              data?.data?.map((category) => <CategoryItem key={category._id} refetch={refetch} {...category} />)}
+          </tbody>
+        </table>
+      </div>
+      <NotFoundBox data={data.data} value="دسته بندی" />
+      <Pagination data={data} />
+      {isForm && <CategoryForm refetch={refetch} />}
+      <Modal title="حذف" body="آیا از حذف این دسته اطمینان دارید؟" isOpen={isModal} cancelHandler={cancelHandler}>
         <button className="btn" onClick={cancelHandler}>
           انصراف
         </button>
-        <button className="delete-btn" onClick={deleteHandler}>
+        <button className="delete-btn" onClick={() => deleteHandler({ mutate: deleteMutate, refetch })}>
           حذف
         </button>
       </Modal>

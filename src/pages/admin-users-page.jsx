@@ -1,13 +1,15 @@
-import { useState } from "react";
-import { useUsers } from "../hooks/useUser";
-import { useSearchParams } from "react-router";
 import Loading from "../components/loading";
-import UserItem from "../features/admin/components/user-item";
+import Modal from "../components/modal";
+import NotFoundBox from "../components/not-found-box";
+import Pagination from "../components/pagination";
+import { usePage } from "../context/admin-page-context";
+import UserList from "../features/admin/user-list";
+import { useToggleBanUser, useUsers } from "../hooks/useUser";
 
 const AdminUsersPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [page, setPage] = useState(searchParams.get("page") || 1);
-  const { data, isLoading } = useUsers(page);
+  const { page, selectedItem, isModal, deleteHandler, cancelHandler } = usePage();
+  const { data, isLoading, refetch } = useUsers(page);
+  const { mutate } = useToggleBanUser();
 
   if (isLoading) {
     return <Loading />;
@@ -15,18 +17,17 @@ const AdminUsersPage = () => {
 
   return (
     <>
-      <table className="table-container">
-        <thead>
-          <tr>
-            <th className="table-header">نام</th>
-            <th className="table-header">موبایل</th>
-            <th className="table-header">ایمیل</th>
-            <th className="table-header">تاریخ عضویت</th>
-            <th className="table-header">عملیات</th>
-          </tr>
-        </thead>
-        <tbody>{data?.data?.length !== 0 && data?.data?.map((user) => <UserItem key={user._id} {...user} />)}</tbody>
-      </table>
+      <UserList data={data} />
+      <NotFoundBox data={data.data} value="کاربر" />
+      <Pagination data={data} />
+      <Modal title="بن" body="آیا از بن کاربر اطمینان دارید؟" isOpen={isModal} cancelHandler={cancelHandler}>
+        <button className="btn" onClick={cancelHandler}>
+          انصراف
+        </button>
+        <button className="delete-btn" onClick={() => deleteHandler({ mutate: () => mutate(selectedItem), refetch })}>
+          بن
+        </button>
+      </Modal>
     </>
   );
 };

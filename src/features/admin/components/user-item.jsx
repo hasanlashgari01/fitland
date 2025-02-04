@@ -1,13 +1,16 @@
+import { GrUserAdmin } from "react-icons/gr";
 import { HiCheckCircle, HiOutlineUser } from "react-icons/hi2";
 import { IoBan } from "react-icons/io5";
+import { usePage } from "../../../context/admin-page-context";
 import { cn } from "../../../shared/cn";
-import { GrUserAdmin } from "react-icons/gr";
 
-const UserItem = ({ _id, fullName, mobile, email, role, verifyMobile, createdAt, updatedAt }) => {
+const UserItem = ({ _id, fullName, mobile, email, role, verifyMobile, createdAt }) => {
+  const { showModalHandler } = usePage();
+
   const d = new Date(createdAt);
 
   return (
-    <tr className={cn("fade-in invisible opacity-0", { "bg-amber-100/75": role === "ADMIN" })}>
+    <tr className={cn("fade-in opacity-0", { "bg-amber-100/75": role === "ADMIN" })}>
       <td className="table-div">{fullName}</td>
       <td className="table-div">
         <div className="flex gap-10">
@@ -18,7 +21,7 @@ const UserItem = ({ _id, fullName, mobile, email, role, verifyMobile, createdAt,
       <td className="table-div">{email ? email : "-----"}</td>
       <td className="table-div">{d.toLocaleDateString("fa-IR")}</td>
       <td className="table-div flex gap-4">
-        <button className="action-btn bg-red-500 dark:bg-red-600">
+        <button className="action-btn bg-red-500 dark:bg-red-600" onClick={() => showModalHandler(_id)}>
           <IoBan size={20} />
         </button>
         {role === "USER" ? (

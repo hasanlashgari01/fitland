@@ -1,11 +1,13 @@
-import { useForm } from "react-hook-form";
-import { useCategory, useCreateCategory, useUpdateCategory } from "../../../hooks/useCategory";
 import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { usePage } from "../../../context/admin-page-context";
+import { useCategory, useCreateCategory, useUpdateCategory } from "../../../hooks/useCategory";
 
-const CategoryForm = ({ id, cancelHandler, refetch }) => {
-  const { data, isLoading } = useCategory(id);
+const CategoryForm = ({ refetch }) => {
+  const { selectedItem, cancelHandler } = usePage();
+  const { data, isLoading } = useCategory(selectedItem);
   const { mutate: createMutate } = useCreateCategory();
-  const { mutate: updateMutate } = useUpdateCategory(id);
+  const { mutate: updateMutate } = useUpdateCategory(selectedItem);
   const {
     register,
     handleSubmit,
@@ -17,15 +19,15 @@ const CategoryForm = ({ id, cancelHandler, refetch }) => {
   });
 
   useEffect(() => {
-    if (id && !isLoading) {
+    if (selectedItem && !isLoading) {
       setValue("name", data.name);
       setValue("slug", data.slug);
     }
-  }, [id, isLoading]);
+  }, [selectedItem, isLoading]);
 
   const onSubmit = (data) => {
-    if (id) {
-      updateMutate({ id, data });
+    if (selectedItem) {
+      updateMutate({ selectedItem, data });
     } else {
       createMutate(data);
     }
@@ -39,7 +41,7 @@ const CategoryForm = ({ id, cancelHandler, refetch }) => {
   return (
     <div className="modal-container" onClick={cancelHandler}>
       <form className="form-modal" onSubmit={handleSubmit(onSubmit)} onClick={(e) => e.stopPropagation()}>
-        <h2 className="text-lg font-semibold">{id ? "به روز رسانی" : "ایجاد"} دسته</h2>
+        <h2 className="text-lg font-semibold">{selectedItem ? "به روز رسانی" : "ایجاد"} دسته</h2>
         <div className="mt-8 grid gap-y-8">
           <div>
             <label className="flex items-center justify-between text-sm">
@@ -72,7 +74,7 @@ const CategoryForm = ({ id, cancelHandler, refetch }) => {
           </div>
         </div>
         <button type="submit" className="bg-primary-500 mt-8 w-full cursor-pointer rounded-lg py-3 text-white">
-          {id ? "به روز رسانی" : "ایجاد"}
+          {selectedItem ? "به روز رسانی" : "ایجاد"}
         </button>
       </form>
     </div>
