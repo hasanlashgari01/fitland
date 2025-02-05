@@ -13,6 +13,9 @@ export const getCategoriesService = async ({ status, page }) => {
   }).then((res) => res.data);
 };
 
+export const getCategoryListService = async () =>
+  await httpInterceptedService("/admin/category-list").then((res) => res.data);
+
 export const deleteCategoryService = async (id) =>
   await httpInterceptedService.delete(`/admin/category/${id}`).then((res) => res.data);
 

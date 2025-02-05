@@ -1,7 +1,7 @@
 import { usePage } from "../../../context/admin-page-context";
 import { cn } from "../../../shared/cn";
 
-const Button = ({ title, status = "add" }) => {
+const Button = ({ title, status = "add", onDelete }) => {
   const { showCreateFormHander } = usePage();
 
   return (
@@ -10,7 +10,7 @@ const Button = ({ title, status = "add" }) => {
         "border-blue-400 bg-blue-500": status === "add",
         "bg-red-500": status === "delete",
       })}
-      onClick={showCreateFormHander}
+      onClick={onDelete ?? showCreateFormHander}
     >
       {status === "add" && `افزودن ${title} جدید`}
       {status === "delete" && `حذف`}

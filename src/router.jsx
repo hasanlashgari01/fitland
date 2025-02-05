@@ -12,6 +12,7 @@ import AdminProductsPage from "./pages/admin-products-page";
 import AdminUsersPage from "./pages/admin-users-page";
 import HomePage from "./pages/home-page";
 import NotFoundPage from "./pages/not-found-page";
+import AdminProductCreatePage from "./pages/admin-product-create-page";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
     children: [
       { path: "dashboard", element: <AdminDashboardPage /> },
       { path: "products", element: <AdminProductsPage /> },
+      { path: "product/create", element: <AdminProductCreatePage /> },
       { path: "products/:id", element: <AdminProductPage /> },
       { path: "users", element: <AdminUsersPage /> },
       { path: "orders", element: <AdminOrdersPage /> },

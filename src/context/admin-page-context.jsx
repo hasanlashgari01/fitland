@@ -33,12 +33,19 @@ export const usePage = () => {
     setIsModal(true);
   };
 
-  const deleteHandler = ({ mutate, refetch }) => {
+  const deleteHandler = ({ mutate, refetch, redirect }) => {
     mutate(selectedItem);
+    if (refetch) {
+      setTimeout(() => {
+        refetch();
+      }, 100);
+    }
+    if (redirect) {
+      setTimeout(() => {
+        redirect();
+      }, 200);
+    }
     setIsModal(false);
-    setTimeout(() => {
-      refetch();
-    }, 100);
   };
 
   const cancelHandler = () => {

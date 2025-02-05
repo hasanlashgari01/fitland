@@ -1,5 +1,10 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { deleteProductService, getProductItemService, getProductsService } from "../services/products";
+import {
+  createProductService,
+  deleteProductService,
+  getProductItemService,
+  getProductsService,
+} from "../services/products";
 
 export const useProducts = (page) =>
   useQuery({
@@ -17,4 +22,10 @@ export const useDeleteProduct = () =>
   useMutation({
     mutationKey: ["product"],
     mutationFn: (productId) => deleteProductService(productId),
+  });
+
+export const useCreateProduct = () =>
+  useMutation({
+    mutationKey: ["product"],
+    mutationFn: (data) => createProductService(data),
   });

@@ -3,6 +3,7 @@ import {
   createCategoryService,
   deleteCategoryService,
   getCategoriesService,
+  getCategoryListService,
   getCategoryService,
   toggleActiveCategoryService,
   updateCategoryService,
@@ -12,6 +13,12 @@ export const useCategories = (status, page) =>
   useQuery({
     queryKey: ["categories", status, page],
     queryFn: () => getCategoriesService({ status, page }),
+  });
+
+export const useCategoryList = () =>
+  useQuery({
+    queryKey: ["category-list"],
+    queryFn: getCategoryListService,
   });
 
 export const useDeleteCategory = () =>
