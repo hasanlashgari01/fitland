@@ -22,11 +22,23 @@ const AdminProductsPage = () => {
   return (
     <>
       <ProductHeader />
-      <div className="xs:grid-cols-2 mt-8 grid min-h-[34rem] grid-cols-1 gap-6 md:grid-cols-3 xl:grid-cols-4">
-        {data.data.map((product) => (
-          <Product key={product._id} {...product} />
-        ))}
-      </div>
+      <table className="table-container mt-8 table-auto">
+        <thead>
+          <tr>
+            <th className="table-header w-16 text-center">عکس</th>
+            <th className="table-header w-96 text-center">عنوان</th>
+            <th className="table-header text-center">قیمت</th>
+            <th className="table-header text-center">تخفیف</th>
+            <th className="table-header text-center">موجودی</th>
+            <th className="table-header text-center">وضعیت</th>
+            <th className="table-header text-center">عملیات</th>
+          </tr>
+        </thead>
+        <tbody className="fade-in">
+          {data?.data?.length !== 0 &&
+            data?.data?.map((category) => <Product key={category._id} refetch={refetch} {...category} />)}
+        </tbody>
+      </table>
       <Pagination data={data} />
       <Modal title="حذف" body="آیا از حذف این دسته اطمینان دارید؟" isOpen={isModal} cancelHandler={cancelHandler}>
         <button className="btn" onClick={cancelHandler}>

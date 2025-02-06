@@ -4,6 +4,7 @@ import {
   deleteProductService,
   getProductItemService,
   getProductsService,
+  toggleStatusProductService,
 } from "../services/products";
 
 export const useProducts = (page) =>
@@ -28,4 +29,10 @@ export const useCreateProduct = () =>
   useMutation({
     mutationKey: ["product"],
     mutationFn: (data) => createProductService(data),
+  });
+
+export const useToggleStatusProduct = () =>
+  useMutation({
+    mutationKey: ["product"],
+    mutationFn: (productId) => toggleStatusProductService(productId),
   });

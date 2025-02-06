@@ -19,3 +19,6 @@ export const getProductItemService = async (id) =>
 
 export const deleteProductService = async (id) =>
   await httpInterceptedService.delete(`/admin/product/${id}`).then((res) => res.data);
+
+export const toggleStatusProductService = async (id) =>
+  await httpInterceptedService.patch(`/admin/product/${id}`).then((res) => res.data);

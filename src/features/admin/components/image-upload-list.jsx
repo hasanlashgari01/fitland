@@ -3,9 +3,7 @@ import ImageUploading from "react-images-uploading";
 import ImageUpload from "./image-upload-item";
 
 const ImageUploadList = ({ images, setImages }) => {
-  const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
-    console.log(imageList, addUpdateIndex);
+  const onChange = (imageList) => {
     setImages(imageList);
   };
 
