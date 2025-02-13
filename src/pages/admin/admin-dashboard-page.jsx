@@ -1,4 +1,4 @@
-import Welcome from "../features/admin/components/welcome";
+import Welcome from "../../features/admin/components/welcome";
 
 const AdminDashboardPage = () => {
   return (

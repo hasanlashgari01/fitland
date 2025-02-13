@@ -1,13 +1,13 @@
-import Loading from "../components/loading";
-import Modal from "../components/modal";
-import Pagination from "../components/pagination";
-import { usePage } from "../context/admin-page-context";
-import UserList from "../features/admin/user-list";
-import { useToggleBanUser, useUsers } from "../hooks/useUser";
+import Loading from "../../components/loading";
+import Modal from "../../components/modal";
+import Pagination from "../../components/pagination";
+import { usePage } from "../../context/admin-page-context";
+import BanList from "../../features/admin/ban-list";
+import { useBanUsers, useToggleBanUser } from "../../hooks/useUser";
 
-const AdminUsersPage = () => {
+const AdminBansPage = () => {
   const { page, selectedItem, isModal, deleteHandler, cancelHandler } = usePage();
-  const { data, isLoading, refetch } = useUsers(page);
+  const { data, isLoading, refetch } = useBanUsers(page);
   const { mutate } = useToggleBanUser();
 
   if (isLoading) {
@@ -15,8 +15,8 @@ const AdminUsersPage = () => {
   }
 
   return (
-    <>
-      <UserList data={data} />
+    <div>
+      <BanList data={data} />
       <Pagination data={data} />
       <Modal title="بن" body="آیا از بن کاربر اطمینان دارید؟" isOpen={isModal} cancelHandler={cancelHandler}>
         <button className="btn" onClick={cancelHandler}>
@@ -26,8 +26,7 @@ const AdminUsersPage = () => {
           بن
         </button>
       </Modal>
-    </>
+    </div>
   );
 };
-
-export default AdminUsersPage;
+export default AdminBansPage;

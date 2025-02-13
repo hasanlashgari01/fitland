@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
-import Loading from "../components/loading";
-import Input from "../features/admin/components/input";
-import InputRadio from "../features/admin/components/input-radio";
-import { useBrandList } from "../hooks/useBrand";
-import { useCategoryList } from "../hooks/useCategory";
-import { useCreateProduct } from "../hooks/useProduct";
-import ImageUploadList from "../features/admin/components/image-upload-list";
+import Loading from "../../components/loading";
+import Input from "../../features/admin/components/input";
+import InputRadio from "../../features/admin/components/input-radio";
+import { useBrandList } from "../../hooks/useBrand";
+import { useCategoryList } from "../../hooks/useCategory";
+import { useCreateProduct } from "../../hooks/useProduct";
+import ImageUploadList from "../../features/admin/components/image-upload-list";
 
 const AdminProductCreatePage = () => {
   const { data: categories, isLoading: isLoadingCategory } = useCategoryList();

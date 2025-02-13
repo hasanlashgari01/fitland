@@ -1,10 +1,10 @@
-import Loading from "../components/loading";
-import Modal from "../components/modal";
-import Pagination from "../components/pagination";
-import { usePage } from "../context/admin-page-context";
-import Product from "../features/admin/components/product";
-import ProductHeader from "../features/admin/components/product-header";
-import { useDeleteProduct, useProducts } from "../hooks/useProduct";
+import Loading from "../../components/loading";
+import Modal from "../../components/modal";
+import Pagination from "../../components/pagination";
+import { usePage } from "../../context/admin-page-context";
+import Product from "../../features/admin/components/product";
+import ProductHeader from "../../features/admin/components/product-header";
+import { useDeleteProduct, useProducts } from "../../hooks/useProduct";
 
 const AdminProductsPage = () => {
   const { page, isModal, cancelHandler, deleteHandler } = usePage();

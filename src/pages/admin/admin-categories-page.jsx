@@ -1,6 +1,6 @@
 import { useState } from "react";
-import CategoryList from "../features/admin/category-list";
-import CategoryHeader from "../features/admin/components/category-header";
+import CategoryList from "../../features/admin/category-list";
+import CategoryHeader from "../../features/admin/components/category-header";
 
 const AdminCategoriesPage = () => {
   const [status, setStatus] = useState("ALL");

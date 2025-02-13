@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router";
-import AdminThemeProvider from "../context/admin-theme-context";
-import Sidebar from "../features/admin/components/sidebar";
-import AdminPageProvider from "../context/admin-page-context";
+import AdminThemeProvider from "../../context/admin-theme-context";
+import Sidebar from "../../features/admin/components/sidebar";
+import AdminPageProvider from "../../context/admin-page-context";
 
 const AdminPanelLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
