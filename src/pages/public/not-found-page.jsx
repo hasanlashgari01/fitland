@@ -1,7 +1,12 @@
+import Header from "../../layout/public/header";
+
 const NotFoundPage = () => {
   return (
-    <div>NotFoundPage</div>
-  )
-}
+    <div>
+      <Header />
+      NotFoundPage
+    </div>
+  );
+};
 
-export default NotFoundPage
+export default NotFoundPage;

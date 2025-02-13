@@ -3,10 +3,10 @@ import Header from "./header";
 
 const PublicLayout = () => {
   return (
-    <div>
+    <>
       <Header />
       <Outlet />
-    </div>
+    </>
   );
 };
 

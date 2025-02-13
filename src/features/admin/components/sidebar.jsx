@@ -26,7 +26,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     <aside className={cn("sidebar", { "translate-x-0": isOpen })} ref={sidebarRef}>
       <div className="flex flex-col gap-2 border-slate-100 px-2 py-1.5 transition-opacity dark:border-slate-950">
         <SidebarProfile />
-        <div className="flex flex-col mt-8">
+        <div id="admin-menu" className="flex flex-col mt-8">
           {items.map((item) => (
             <NavLink key={item.id} to={item.path} className="text-500 rounded-lg p-3 transition">
               {item.title}

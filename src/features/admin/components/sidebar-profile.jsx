@@ -1,7 +1,7 @@
-import useMe from "../../../hooks/useMe";
+import { useMe } from "../../../hooks/useUser";
 
 const SidebarProfile = () => {
-  const [data, isLoading] = useMe();
+  const { data, isLoading } = useMe();
 
   return (
     <div className="flex items-center gap-4">
