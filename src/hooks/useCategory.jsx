@@ -3,6 +3,7 @@ import {
   createCategoryService,
   deleteCategoryService,
   getCategoriesService,
+  getCategoryBySlugService,
   getCategoryListService,
   getCategoryService,
   toggleActiveCategoryService,
@@ -49,4 +50,10 @@ export const useCategory = (id) =>
   useQuery({
     queryKey: ["category", id],
     queryFn: () => getCategoryService(id),
+  });
+
+export const useCategoryBySlug = (slug) =>
+  useQuery({
+    queryKey: ["category", slug],
+    queryFn: () => getCategoryBySlugService(slug),
   });

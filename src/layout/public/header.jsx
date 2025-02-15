@@ -29,7 +29,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="px-6 py-4 lg:px-16 lg:py-6 xl:px-26 xl:py-8">
+      <header className="container py-4 lg:py-6 xl:py-8">
         <div className="flex items-center justify-between">
           <div className="xl:hidden">
             <HiBars3 size={24} className="cursor-pointer" onClick={() => setIsMenu(true)} />

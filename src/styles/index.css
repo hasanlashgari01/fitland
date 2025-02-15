@@ -76,13 +76,14 @@
   --info-200: #c7f2fc;
 
   --breakpoint-xs: 30rem;
+
+  --text-tiny: 0.625rem;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @utility container {
-  margin-inline: auto;
-  padding-inline: 2rem;
+  @apply xs:px-4 mx-auto px-6 lg:px-16 xl:px-27;
 }
 
 @layer base {

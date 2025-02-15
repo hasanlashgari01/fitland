@@ -13,6 +13,7 @@ import AdminProductsPage from "./pages/admin/admin-products-page";
 import AdminUsersPage from "./pages/admin/admin-users-page";
 import HomePage from "./pages/public/home-page";
 import NotFoundPage from "./pages/public/not-found-page";
+import CategoryPage from "./pages/public/category-page";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
+      },
+      {
+        path: "/category/:slug",
+        element: <CategoryPage />,
       },
     ],
   },
@@ -70,6 +75,10 @@ const router = createBrowserRouter([
         element: <AdminBansPage />,
       },
     ],
+  },
+  {
+    path: "/not-found",
+    element: <NotFoundPage />,
   },
   {
     path: "*",
