@@ -9,6 +9,7 @@ import {
   toggleActiveCategoryService,
   updateCategoryService,
 } from "../services/category";
+import useFilter from "./useFilter";
 
 export const useCategories = (status, page) =>
   useQuery({
@@ -52,8 +53,11 @@ export const useCategory = (id) =>
     queryFn: () => getCategoryService(id),
   });
 
-export const useCategoryBySlug = (slug) =>
-  useQuery({
-    queryKey: ["category", slug],
-    queryFn: () => getCategoryBySlugService(slug),
+export const useCategoryBySlug = (slug) => {
+  const { isInventory, isOff, sort } = useFilter();
+
+  return useQuery({
+    queryKey: ["category", slug, isInventory, isOff, sort],
+    queryFn: () => getCategoryBySlugService(slug, isInventory, isOff, sort),
   });
+};

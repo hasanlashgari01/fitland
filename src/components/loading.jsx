@@ -2,8 +2,8 @@ import { BeatLoader } from "react-spinners";
 
 const Loading = () => {
   return (
-    <div className="absolute inset-1/2 rotate-90 translate-1/2">
-      <BeatLoader className="flex h-full w-full items-center justify-center bg-amber-300" />
+    <div className="fixed inset-1/2 flex size-40 -translate-y-1/2 translate-x-1/2 items-center justify-center">
+      <BeatLoader size={30} />
     </div>
   );
 };
