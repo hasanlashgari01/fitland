@@ -208,6 +208,10 @@
   .action-btn {
     @apply cursor-pointer rounded p-1 text-white transition-colors;
   }
+
+  .sort__active {
+    @apply border-primary border-b-2;
+  }
 }
 
 .fade-in {

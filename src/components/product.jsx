@@ -11,19 +11,23 @@ const Product = ({ name, slug, price, discount, cover, inventory, isSpecialOffer
 
         <div className="flex-2 p-1 pr-0">
           <h3 className="text-tiny xs:text-xs line-clamp-2 leading-relaxed md:text-sm">{name}</h3>
-          <div className="flex justify-between pt-2 pl-5 sm:pt-1">
-            <span className="text-tiny xs:text-xs xs:leading-relaxed text-red-500">
-              تنها {inventory} عدد در انبار باقی مانده
-            </span>
+          <div className="flex min-h-6 justify-between pt-2 pl-5 sm:pt-1">
+            {inventory < 10 && (
+              <span className="text-tiny xs:text-xs xs:leading-relaxed text-red-500">
+                تنها {inventory} عدد در انبار باقی مانده
+              </span>
+            )}
           </div>
           <div className="mt-1 flex flex-row-reverse items-center justify-between pt-3 sm:pt-1.5">
             <div className="flex items-center gap-1">
-              <span className="text-xs leading-4 md:text-sm">{price.toLocaleString()}</span>
+              <span className="text-xs leading-4 md:text-sm">
+                {(price - (price * discount) / 100).toLocaleString()}
+              </span>
               <img src="/src/assets/icon/toman.svg" alt="" className="size-4" />
             </div>
             <DiscountBadge discount={discount} />
           </div>
-          <div className="flex flex-row-reverse justify-between max-md:pt-1 pl-3">
+          <div className="flex flex-row-reverse justify-between pl-3 max-md:pt-1">
             {discount > 0 && (
               <span className="text-tiny xs:text-xs xs:leading-relaxed text-center text-gray-400 line-through md:text-sm">
                 {price.toLocaleString()}

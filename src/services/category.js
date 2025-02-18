@@ -31,11 +31,12 @@ export const createCategoryService = async (data) =>
 export const getCategoryService = async (id) =>
   await httpInterceptedService(`/admin/category/${id}`).then((res) => res.data);
 
-export const getCategoryBySlugService = async (slug, inventory, off) =>
+export const getCategoryBySlugService = async (slug, inventory, off, sort) =>
   await httpInterceptedService(`/category/slug/${slug}`, {
     params: {
       slug,
       inventory,
       off,
+      sort,
     },
   }).then((res) => res.data);

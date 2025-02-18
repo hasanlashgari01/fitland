@@ -2,6 +2,7 @@ import { useState } from "react";
 import { HiOutlineAdjustmentsHorizontal, HiOutlineBars3BottomLeft } from "react-icons/hi2";
 import { cn } from "../shared/cn";
 import Filter from "./filter";
+import Sort from "./sort";
 
 const FilterMobile = () => {
   const [isModal, setIsModal] = useState(false);
@@ -23,11 +24,11 @@ const FilterMobile = () => {
           </div>
         </div>
         <div className="flex gap-4 *:cursor-pointer *:select-none max-xl:hidden">
-          <span>جدیدترین</span>
-          <span>قدیمی‌ترین</span>
-          <span>گران‌ترین</span>
-          <span>ارزان‌ترین</span>
-          <span>بیشترین‌تخفیف</span>
+          <Sort value="newest">جدیدترین</Sort>
+          <Sort value="oldest">قدیمی‌ترین</Sort>
+          <Sort value="expensive">گران‌ترین</Sort>
+          <Sort value="cheap">ارزان‌ترین</Sort>
+          <Sort value="discount">بیشترین‌تخفیف</Sort>
         </div>
       </div>
 

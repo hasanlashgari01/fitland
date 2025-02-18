@@ -10,7 +10,6 @@ const CategoryPage = () => {
   const navigate = useNavigate();
   const { data: products, isLoading, isError, error } = useCategoryBySlug(slug);
 
-  if (isLoading) return <Loading />;
   if (isError && error.status === 404) return navigate("/not-found");
 
   return (
@@ -18,13 +17,17 @@ const CategoryPage = () => {
       <div className="flex gap-6">
         <Filter isHidden />
 
-        <div>
+        <div className="w-full">
           <FilterMobile />
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {products.data.map((productItem) => (
-              <Product key={productItem._id} {...productItem.product} />
-            ))}
-          </div>
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {products.data.map((productItem) => (
+                <Product key={productItem._id} {...productItem.product} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
