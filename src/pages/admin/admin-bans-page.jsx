@@ -3,9 +3,11 @@ import Modal from "../../components/modal";
 import Pagination from "../../components/pagination";
 import { usePage } from "../../context/admin-page-context";
 import BanList from "../../features/admin/ban-list";
+import useTitle from "../../hooks/useTitle";
 import { useBanUsers, useToggleBanUser } from "../../hooks/useUser";
 
 const AdminBansPage = () => {
+  useTitle("پنل ادمین - کاربران بن شده");
   const { page, selectedItem, isModal, deleteHandler, cancelHandler } = usePage();
   const { data, isLoading, refetch } = useBanUsers(page);
   const { mutate } = useToggleBanUser();

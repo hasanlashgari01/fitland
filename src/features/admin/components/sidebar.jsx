@@ -3,7 +3,7 @@ import { NavLink } from "react-router";
 import { cn } from "../../../shared/cn";
 import items from "./../../../data/admin-sidebar.json";
 import SidebarProfile from "./sidebar-profile";
-import ThemeSwitcher from "./theme-switcher";
+import ThemeSwitcher from "../../../components/theme-switcher";
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
   const sidebarRef = useRef(null);
@@ -23,16 +23,19 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
   }, []);
 
   return (
-    <aside className={cn("sidebar", { "translate-x-0": isOpen })} ref={sidebarRef}>
+    <aside
+      className={cn("sidebar h-dvh not-dark:bg-gray-50", { "translate-x-0": isOpen })}
+      ref={sidebarRef}
+    >
       <div className="flex flex-col gap-2 border-slate-100 px-2 py-1.5 transition-opacity dark:border-slate-950">
         <SidebarProfile />
-        <div id="admin-menu" className="flex flex-col mt-8">
+        <ul id="admin-menu" className="mt-8 flex flex-col">
           {items.map((item) => (
             <NavLink key={item.id} to={item.path} className="text-500 rounded-lg p-3 transition">
               {item.title}
             </NavLink>
           ))}
-        </div>
+        </ul>
       </div>
       <ThemeSwitcher />
     </aside>

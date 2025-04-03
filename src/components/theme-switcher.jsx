@@ -1,6 +1,6 @@
-import { useTheme } from "../../../context/admin-theme-context";
-import themes from "../../../data/theme-btn.json";
-import { cn } from "../../../shared/cn";
+import { useTheme } from "../context/admin-theme-context";
+import themes from "../data/theme-btn.json";
+import { cn } from "../shared/cn";
 
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();

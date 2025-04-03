@@ -1,8 +1,9 @@
 [
   { "id": 1, "title": "داشبورد", "path": "dashboard" },
   { "id": 2, "title": "محصولات", "path": "products" },
-  { "id": 3, "title": "سفارشات", "path": "orders" },
-  { "id": 4, "title": "دسته بندی ها ", "path": "categories" },
-  { "id": 5, "title": "کاربران", "path": "users" },
-  { "id": 6, "title": "کاربران بن شده", "path": "bans" }
+  { "id": 3, "title": "نظرات", "path": "comments" },
+  { "id": 4, "title": "سفارشات", "path": "orders" },
+  { "id": 5, "title": "دسته بندی ها ", "path": "categories" },
+  { "id": 6, "title": "کاربران", "path": "users" },
+  { "id": 7, "title": "کاربران بن شده", "path": "bans" }
 ]

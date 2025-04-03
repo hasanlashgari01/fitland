@@ -1,4 +1,4 @@
-import { httpInterceptedService } from "../core/http-service";
+import { httpInterceptedService, httpService } from "../core/http-service";
 
 export const getCategoriesService = async ({ status, page }) => {
   let url = "/admin/category";
@@ -12,6 +12,8 @@ export const getCategoriesService = async ({ status, page }) => {
     },
   }).then((res) => res.data);
 };
+
+export const getUserCategoryListService = async () => await httpService("/category").then((res) => res.data);
 
 export const getCategoryListService = async () =>
   await httpInterceptedService("/admin/category-list").then((res) => res.data);

@@ -5,8 +5,10 @@ import { usePage } from "../../context/admin-page-context";
 import Product from "../../features/admin/components/product";
 import ProductHeader from "../../features/admin/components/product-header";
 import { useDeleteProduct, useProducts } from "../../hooks/useProduct";
+import useTitle from "../../hooks/useTitle";
 
 const AdminProductsPage = () => {
+  useTitle("پنل ادمین - محصولات");
   const { page, isModal, cancelHandler, deleteHandler } = usePage();
   const { data, isLoading, refetch } = useProducts(page);
   const { mutate: deleteMutate } = useDeleteProduct();

@@ -6,23 +6,24 @@ const Pagination = ({ data }) => {
   const { totalPage } = data.pagination;
   const [searchParams, setSearchParams] = useSearchParams();
   const [page, setPage] = useState(Number(searchParams.get("page") < 1 ? 1 : searchParams.get("page")));
+  const [pages, setPages] = useState([]);
 
   useEffect(() => {
-    setSearchParams({ page });
+    for (let page = 1; page <= totalPage; page++) {
+      setPages((prev) => [...prev, page]);
+    }
+  }, []);
+
+  useEffect(() => {
+    const newParams = new URLSearchParams();
+
+    if (page) newParams.set("page", page);
+
+    setSearchParams(newParams);
   }, [page]);
 
   const prevPageHandler = () => setPage((prev) => prev - 1);
   const nextPageHandler = () => setPage((prev) => prev + 1);
-
-  const renderPages = () => {
-    const pages = [];
-
-    for (let page = 1; page <= totalPage; page++) {
-      pages.push(page);
-    }
-
-    return pages;
-  };
 
   return (
     <>
@@ -31,7 +32,7 @@ const Pagination = ({ data }) => {
           <button className="pagination-btn" disabled={page === 1} onClick={prevPageHandler}>
             قبلی
           </button>
-          {renderPages(data).map((item, index) => (
+          {pages.map((item, index) => (
             <span
               key={index}
               className={cn("pagination-btn", { "bg-amber-500 text-white": item === page })}

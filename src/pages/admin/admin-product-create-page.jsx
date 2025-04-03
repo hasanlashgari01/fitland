@@ -7,8 +7,10 @@ import { useBrandList } from "../../hooks/useBrand";
 import { useCategoryList } from "../../hooks/useCategory";
 import { useCreateProduct } from "../../hooks/useProduct";
 import ImageUploadList from "../../features/admin/components/image-upload-list";
+import useTitle from "../../hooks/useTitle";
 
 const AdminProductCreatePage = () => {
+  useTitle("پنل ادمین - ایجاد محصول");
   const { data: categories, isLoading: isLoadingCategory } = useCategoryList();
   const { data: brands, isLoading: isLoadingBrand } = useBrandList();
   const { mutate } = useCreateProduct();

@@ -130,6 +130,28 @@
   .warning-btn {
     @apply cursor-pointer rounded bg-yellow-500 px-5 py-1.5 text-white disabled:cursor-not-allowed;
   }
+
+  .icon-box {
+    @apply relative flex size-13 items-center justify-center rounded-full bg-gray-100 text-slate-500 lg:cursor-pointer;
+  }
+
+  .tab {
+    @apply relative cursor-pointer px-1 py-3 select-none md:px-4;
+  }
+
+  .tab--active::after {
+    content: "";
+
+    @apply bg-primary right-0 bottom-0 h-1.5 w-full rounded-t-2xl md:absolute;
+  }
+
+  .tab__badge {
+    @apply mr-2 hidden h-5 min-w-5 items-center justify-center rounded bg-slate-400 px-1 text-sm leading-relaxed text-white lg:flex;
+  }
+
+  .tab--active .tab__badge {
+    @apply bg-primary;
+  }
 }
 
 @layer components {
@@ -150,10 +172,19 @@
   }
 
   .sidebar {
-    @apply sticky top-0 flex h-dvh min-w-[17.5rem] flex-col justify-between gap-2 p-6 transition-transform;
-    @apply border border-slate-100 dark:border-slate-950;
-    @apply bg-gray-50 dark:bg-slate-800 dark:text-white;
+    @apply sticky top-0 flex min-w-[17.5rem] flex-col justify-between gap-2 p-6 transition-transform;
+    @apply border border-slate-100 dark:border-slate-950 dark:bg-slate-800 dark:text-white;
     @apply max-lg:absolute max-lg:z-30 max-lg:translate-x-full;
+
+    height: calc(100dvh - 64px);
+  }
+
+  .theme__dropdown {
+    @apply absolute top-full z-20 mt-5 flex w-40 flex-col gap-3 rounded bg-gray-100 px-2 py-2 shadow-xl transition-all duration-100 ease-in select-none;
+  }
+
+  .theme__dropdown--hide {
+    @apply invisible -translate-y-2 opacity-0;
   }
 
   .theme-btn {
@@ -212,25 +243,60 @@
   .sort__active {
     @apply border-primary border-b-2;
   }
+
+  .cart__box {
+    max-height: calc(600px - 160px);
+  }
+
+  .cart__step-item {
+    @apply flex shrink-0 flex-col items-center gap-1 px-2 text-sm text-gray-300 transition-all duration-500;
+  }
+
+  .cart__step--active {
+    @apply text-gray-800;
+  }
+
+  .cart__step-line {
+    @apply relative h-0.5 w-full bg-gray-100;
+  }
+
+  .cart__step-line::after {
+    content: "";
+    @apply absolute h-full w-0 bg-black transition-all duration-500;
+  }
+
+  .cart__step-line:has(+ .cart__step--active) {
+    @apply after:w-full;
+  }
 }
 
 .fade-in {
   animation: fadeIn 1s forwards 0.1s;
 }
 
+.image-fade-in {
+  animation: imageFadeIn 1s forwards 0.2s;
+}
+
 .logo-fade-in {
   animation: logoFadeIn 1.5s forwards 0.5s;
+}
+
+.brand-card {
+  clip-path: polygon(0 40%, 100% 0, 100% 100%, 0% 100%);
+}
+
+.skeleton *:not(:has(*)) {
+  @apply animate-pulse rounded bg-gray-200 text-transparent;
 }
 
 @keyframes fadeIn {
   0% {
     opacity: 0%;
-    /* visibility: hidden; */
   }
 
   100% {
     opacity: 100%;
-    /* visibility: visible; */
   }
 }
 

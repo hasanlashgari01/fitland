@@ -1,9 +1,9 @@
-import { httpInterceptedService } from "../core/http-service";
+import { httpInterceptedService, httpPublicService } from "../core/http-service";
 
-export const getMe = async () => await httpInterceptedService("/auth/me").then((res) => res.data);
+export const getMe = async () => await httpPublicService("/auth/me").then((res) => res.data);
 
 export const getUsersService = async ({ page }) => {
-  return await httpInterceptedService("/admin/users", {
+  return await httpPublicService("/admin/users", {
     params: {
       page,
       limit: import.meta.env.VITE_PAGE_LIMIT,

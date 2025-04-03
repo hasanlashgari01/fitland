@@ -7,6 +7,22 @@ export const httpService = axios.create({
   baseURL,
 });
 
+export const httpPublicService = axios.create({
+  baseURL,
+});
+
+httpPublicService.interceptors.request.use(
+  (request) => {
+    const accessToken = getCookie("accessToken");
+    if (accessToken) {
+      request.headers["Authorization"] = `bearer ${accessToken}`;
+    }
+
+    return request;
+  },
+  (error) => Promise.reject(error),
+);
+
 export const httpInterceptedService = axios.create({
   baseURL,
 });

@@ -1,4 +1,4 @@
-import { httpInterceptedService } from "../core/http-service";
+import { httpInterceptedService, httpPublicService, httpService } from "../core/http-service";
 
 export const getProductsService = async (page) => {
   return await httpInterceptedService("/admin/products", {
@@ -22,3 +22,10 @@ export const deleteProductService = async (id) =>
 
 export const toggleStatusProductService = async (id) =>
   await httpInterceptedService.patch(`/admin/product/${id}`).then((res) => res.data);
+
+export const getProductBySlugService = async (slug) =>
+  await httpPublicService(`/product/${slug}`).then((res) => res.data);
+
+export const getSpecialOffer = async () => await httpService(`/product/special-offer`).then((res) => res.data);
+
+export const getLatestShoes = async () => await httpService(`/product/latest-shoes`).then((res) => res.data);

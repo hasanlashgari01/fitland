@@ -6,9 +6,10 @@ import { usePage } from "../../context/admin-page-context";
 import { useCategories, useDeleteCategory } from "../../hooks/useCategory";
 import CategoryForm from "./components/category-form";
 import CategoryItem from "./components/category-item";
+import DeleteModal from "./../../components/delete-modal";
 
 const CategoryList = ({ status }) => {
-  const { page, isForm, isModal, cancelHandler, deleteHandler } = usePage();
+  const { page, isForm, isModal, cancelHandler } = usePage();
   const { data, isLoading, refetch } = useCategories(status, page);
   const { mutate: deleteMutate } = useDeleteCategory();
 
@@ -37,13 +38,13 @@ const CategoryList = ({ status }) => {
       </div>
       <Pagination data={data} />
       {isForm && <CategoryForm refetch={refetch} />}
-      <Modal title="حذف" body="آیا از حذف این دسته اطمینان دارید؟" isOpen={isModal} cancelHandler={cancelHandler}>
-        <button className="btn" onClick={cancelHandler}>
-          انصراف
-        </button>
-        <button className="delete-btn" onClick={() => deleteHandler({ mutate: deleteMutate, refetch })}>
-          حذف
-        </button>
+      <Modal isOpen={isModal} cancelHandler={cancelHandler}>
+        <DeleteModal
+          title="حذف"
+          body="آیا از حذف این دسته اطمینان دارید؟"
+          deleteMutate={deleteMutate}
+          refetch={refetch}
+        />
       </Modal>
     </>
   );

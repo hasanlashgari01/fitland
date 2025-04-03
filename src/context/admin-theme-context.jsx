@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const AdminThemeContext = createContext();
 
-const AdminThemeProvider = ({ children }) => {
+const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "system");
 
   useEffect(() => {
@@ -36,4 +36,4 @@ export const useTheme = () => {
   return { theme, setTheme };
 };
 
-export default AdminThemeProvider;
+export default ThemeProvider;

@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query";
 import {
   createCategoryService,
   deleteCategoryService,
@@ -6,6 +6,7 @@ import {
   getCategoryBySlugService,
   getCategoryListService,
   getCategoryService,
+  getUserCategoryListService,
   toggleActiveCategoryService,
   updateCategoryService,
 } from "../services/category";
@@ -17,10 +18,17 @@ export const useCategories = (status, page) =>
     queryFn: () => getCategoriesService({ status, page }),
   });
 
+export const useUserCategoryList = () =>
+  useQuery({
+    queryKey: ["user-category-list"],
+    queryFn: getUserCategoryListService,
+  });
+
 export const useCategoryList = () =>
   useQuery({
     queryKey: ["category-list"],
     queryFn: getCategoryListService,
+    placeholderData: keepPreviousData,
   });
 
 export const useDeleteCategory = () =>
@@ -59,5 +67,6 @@ export const useCategoryBySlug = (slug) => {
   return useQuery({
     queryKey: ["category", slug, isInventory, isOff, sort],
     queryFn: () => getCategoryBySlugService(slug, isInventory, isOff, sort),
+    // placeholderData: keepPreviousData,
   });
 };

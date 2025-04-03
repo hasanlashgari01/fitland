@@ -1,9 +1,9 @@
 import { Link } from "react-router";
 import DiscountBadge from "./discount-badge";
 
-const Product = ({ name, slug, price, discount, cover, inventory, isSpecialOffer, createdAt }) => {
+const Product = ({ name, slug, price, discount, cover, inventory }) => {
   return (
-    <div className="overflow-hidden rounded-2xl">
+    <div className="max-w-72 flex-1 overflow-hidden rounded-2xl bg-slate-50">
       <Link to={`/product/${slug}`} className="flex gap-4 sm:flex-col md:px-4 md:py-3">
         <div className="mx-auto h-29.5 sm:size-45 md:size-60">
           <img src={`http://localhost:3000/public/images/${cover}`} alt="" className="h-full object-cover" />
