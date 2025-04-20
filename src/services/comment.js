@@ -28,3 +28,8 @@ export const getCommentService = async (id) =>
 
 export const toggleCommentStatusService = async (id) =>
   await httpInterceptedService.patch(`/admin/comments/${id}`).then((res) => res.data);
+
+export const newCommentService = async (slug, data) => {
+  console.log("🚀 ~ newCommentService ~ data:", data);
+  return await httpInterceptedService.post(`/comment/slug/${slug}`, { text: data }).then((res) => res.data);
+};

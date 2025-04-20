@@ -4,9 +4,9 @@ import NotFoundBox from "../../components/not-found-box";
 import Pagination from "../../components/pagination";
 import { usePage } from "../../context/admin-page-context";
 import { useCategories, useDeleteCategory } from "../../hooks/useCategory";
+import DeleteModal from "./../../components/delete-modal";
 import CategoryForm from "./components/category-form";
 import CategoryItem from "./components/category-item";
-import DeleteModal from "./../../components/delete-modal";
 
 const CategoryList = ({ status }) => {
   const { page, isForm, isModal, cancelHandler } = usePage();
@@ -37,7 +37,7 @@ const CategoryList = ({ status }) => {
         <NotFoundBox data={data.data} value="دسته بندی" />
       </div>
       <Pagination data={data} />
-      {isForm && <CategoryForm refetch={refetch} />}
+      {isForm && <CategoryForm />}
       <Modal isOpen={isModal} cancelHandler={cancelHandler}>
         <DeleteModal
           title="حذف"

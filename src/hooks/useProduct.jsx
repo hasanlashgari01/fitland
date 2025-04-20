@@ -2,12 +2,14 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   createProductService,
   deleteProductService,
+  getLatestSets,
   getLatestShoes,
   getProductBySlugService,
   getProductItemService,
   getProductsService,
   getSpecialOffer,
   toggleStatusProductService,
+  getRelatedProduct,
 } from "../services/products";
 
 export const useProducts = (page) =>
@@ -56,4 +58,16 @@ export const useLatestShoes = () =>
   useQuery({
     queryKey: ["latest-shoes"],
     queryFn: getLatestShoes,
+  });
+
+export const useLatestSets = () =>
+  useQuery({
+    queryKey: ["latest-sets"],
+    queryFn: getLatestSets,
+  });
+
+export const useRelatedProduct = ({ productId }) =>
+  useQuery({
+    queryKey: ["related-product", productId],
+    queryFn: () => getRelatedProduct({ productId }),
   });

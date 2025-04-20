@@ -27,6 +27,7 @@ import HomePage from "./pages/public/home-page";
 import NotFoundPage from "./pages/public/not-found-page";
 import ProductPage from "./pages/public/product-page";
 import MyOrderPage from "./pages/my-account/my-order-page";
+import AdminBrandsPage from "./pages/admin/admin-brands-page";
 
 const router = createBrowserRouter([
   {
@@ -142,6 +143,10 @@ const router = createBrowserRouter([
       {
         path: "comments",
         element: <AdminCommentsPage />,
+      },
+      {
+        path: "brands",
+        element: <AdminBrandsPage />,
       },
     ],
   },

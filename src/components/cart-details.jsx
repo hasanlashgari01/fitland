@@ -6,7 +6,7 @@ import CartDetailsTtem from "./cart-details-item";
 import Input from "./input";
 
 const CartDetails = ({ state, className }) => {
-  const { data, error, isPending, isSuccess, mutate } = useDiscountByCode();
+  const { data, isPending, isSuccess, mutateAsync } = useDiscountByCode();
   const {
     isDisabled,
     code,
@@ -54,7 +54,7 @@ const CartDetails = ({ state, className }) => {
             <Button
               text="ثبت"
               className="bg-amber-400"
-              onClick={() => discountHandler({ error, mutate })}
+              onClick={() => discountHandler({ mutateAsync })}
               isDisabled={code.length === 0}
             />
           )}

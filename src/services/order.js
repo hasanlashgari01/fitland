@@ -17,3 +17,7 @@ export const getOrdersService = async ({ page, status, trackingCode, userSearch 
     },
   }).then((res) => res.data);
 };
+
+export const orderCompletionService = async (orderId) => {
+  return await httpInterceptedService.patch(`/order/${orderId}`, { status: "DELIVERED" }).then((res) => res.data);
+};

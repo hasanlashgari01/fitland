@@ -1,23 +1,25 @@
 import { HiArrowPath, HiOutlineEye, HiOutlineEyeSlash, HiOutlineTrash } from "react-icons/hi2";
 import { usePage } from "../../../context/admin-page-context";
-import { useToggleActiveCategory } from "../../../hooks/useCategory";
+import { useToggleActiveBrand } from "../../../hooks/useBrand";
 import { cn } from "../../../shared/cn";
 import { useQueryClient } from "@tanstack/react-query";
 
-const CategoryItem = ({ _id, name, slug, isActive }) => {
+const BrandItem = ({ _id, name, slug, isActive, productCount }) => {
   const queryClient = useQueryClient();
   const { showModalHandler, showUpdateFormHandler } = usePage();
-  const { mutate: toggleMutate } = useToggleActiveCategory();
+  const { mutate } = useToggleActiveBrand();
 
   const toggleActiveHandler = () => {
-    toggleMutate(_id, {
-      onSuccess: () => queryClient.invalidateQueries(["categories"]),
+    mutate(_id, {
+      onSuccess: () => queryClient.invalidateQueries(["brand-list"]),
     });
   };
 
   return (
-    <tr className="fade-in opacity-0">
-      <td className="table-div">{name}</td>
+    <tr>
+      <td className="table-div">
+        {name} - ({productCount})
+      </td>
       <td className="table-div">{slug}</td>
       <td className="table-div">{isActive ? "فعال" : "غیرفعال"}</td>
       <td className="table-div flex gap-4">
@@ -41,4 +43,4 @@ const CategoryItem = ({ _id, name, slug, isActive }) => {
   );
 };
 
-export default CategoryItem;
+export default BrandItem;

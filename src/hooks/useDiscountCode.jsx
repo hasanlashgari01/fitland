@@ -27,15 +27,14 @@ const useDiscountCode = ({ state }) => {
     }
   }, [discount, code, price, benfit]);
 
-  const discountHandler = ({ error, mutate }) => {
-    mutate(code);
-
-    if (error) {
-      setIsDisabled(false);
-      toast.error("کد تخفیف وجود ندارد");
-    } else {
+  const discountHandler = async ({ mutateAsync }) => {
+    try {
+      await mutateAsync(code);
       setIsDisabled(true);
       toast.success("کد تخفیف ثبت شد");
+    } catch (error) {
+      setIsDisabled(false);
+      toast.error("کد تخفیف وجود ندارد");
     }
   };
 

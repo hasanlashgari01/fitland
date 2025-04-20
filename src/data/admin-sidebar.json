@@ -5,5 +5,6 @@
   { "id": 4, "title": "سفارشات", "path": "orders" },
   { "id": 5, "title": "دسته بندی ها ", "path": "categories" },
   { "id": 6, "title": "کاربران", "path": "users" },
-  { "id": 7, "title": "کاربران بن شده", "path": "bans" }
+  { "id": 7, "title": "کاربران بن شده", "path": "bans" },
+  { "id": 8, "title": "برندها", "path": "brands" }
 ]

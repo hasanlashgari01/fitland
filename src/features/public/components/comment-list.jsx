@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import NotFoundBox from "../../../components/not-found-box";
 import { useCommentList } from "../../../hooks/useComment";
 import useInfiniteScroll from "../../../hooks/useInfiniteScroll";
 import Comments from "./comments";
 
-const CommentList = () => {
-  const { slug } = useParams();
+const CommentList = ({ slug }) => {
   const [comments, setComments] = useState([]);
   const [page, setPage] = useState(1);
   const { data, isLoading } = useCommentList({ slug, page });
@@ -24,9 +23,17 @@ const CommentList = () => {
     loadMore: () => setPage((prev) => prev + 1),
   });
 
-  if (isLoading && comments.length === 0) return null;
+  if (isLoading) return null;
 
-  return <Comments comments={comments} lastCommentRef={lastCommentRef} />;
+  return (
+    <div className="mt-10">
+      {comments.length === 0 ? (
+        <NotFoundBox data={comments} value="نظری" />
+      ) : (
+        <Comments comments={comments} lastCommentRef={lastCommentRef} />
+      )}
+    </div>
+  );
 };
 
 export default CommentList;

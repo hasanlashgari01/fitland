@@ -1,16 +1,14 @@
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import Loading from "../../../components/loading";
 import ProductBox from "../../../components/product-box";
 import { roles } from "../../../data/roles";
-import { useProductBySlug } from "../../../hooks/useProduct";
 import useTitle from "../../../hooks/useTitle";
 import ProductPageDetails from "./product-page-details";
 import ProductPageImage from "./product-page-image";
 
-const ProductPageHeader = () => {
-  const { slug } = useParams();
+const ProductPageHeader = ({ data, isLoading, isError, error }) => {
   const navigate = useNavigate();
-  const { data, isLoading, isError, error } = useProductBySlug(slug);
+
   useTitle(data?.name);
 
   if (isError && error.status === 404) return navigate("/not-found");

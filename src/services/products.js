@@ -29,3 +29,8 @@ export const getProductBySlugService = async (slug) =>
 export const getSpecialOffer = async () => await httpService(`/product/special-offer`).then((res) => res.data);
 
 export const getLatestShoes = async () => await httpService(`/product/latest-shoes`).then((res) => res.data);
+
+export const getLatestSets = async () => await httpService(`/product/latest-sets`).then((res) => res.data);
+
+export const getRelatedProduct = async ({ productId }) =>
+  await httpService(`/product/related/${productId}`).then((res) => res.data);

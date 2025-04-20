@@ -1,5 +1,5 @@
 import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query";
-import { createOrderService, getOrderService, getOrdersService } from "../services/order";
+import { createOrderService, getOrderService, getOrdersService, orderCompletionService } from "../services/order";
 
 export const useCreateOrder = () =>
   useMutation({
@@ -19,4 +19,10 @@ export const useOrders = (data) =>
     queryKey: ["orders", data.page ?? 1, data.status],
     queryFn: () => getOrdersService(data),
     placeholderData: keepPreviousData,
+  });
+
+export const useOrderCompletion = () =>
+  useMutation({
+    mutationKey: ["order-completion"],
+    mutationFn: (orderId) => orderCompletionService(orderId),
   });

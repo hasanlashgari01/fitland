@@ -3,6 +3,7 @@ import {
   getCommentByProductSlug,
   getCommentService,
   getCommentsService,
+  newCommentService,
   toggleCommentStatusService,
 } from "../services/comment";
 
@@ -30,3 +31,21 @@ export const useToggleStatusComment = () =>
     mutationKey: ["toggle-comment"],
     mutationFn: (id) => toggleCommentStatusService(id),
   });
+
+/* export const useCreateComment = ({ slug }) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (content) => createComment(slug, content),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["comment-list", slug, page] });
+    },
+  });
+};
+ */
+export const useNewComment = (slug) => {
+  return useMutation({
+    mutationKey: ["new-comment"],
+    mutationFn: (comment) => newCommentService(slug, comment),
+  });
+};

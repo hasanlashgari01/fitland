@@ -1,13 +1,15 @@
 import toast from "react-hot-toast";
 import { Link, useNavigate, useParams } from "react-router";
-import { useOrder } from "../../hooks/useOrder";
-import { transformDateWithPersianMonth } from "../../shared/date";
-import Loading from "../../components/loading";
 import Image from "../../components/image";
+import Loading from "../../components/loading";
+import { useOrder, useOrderCompletion } from "../../hooks/useOrder";
+import { transformDateWithPersianMonth } from "../../shared/date";
+import Button from "../../components/button";
 
 const MyOrderPage = () => {
   const { trackingCode } = useParams();
-  const { data, isLoading, error } = useOrder(trackingCode);
+  const { data, isLoading, error, refetch } = useOrder(trackingCode);
+  const { mutate } = useOrderCompletion();
   const navigate = useNavigate();
 
   if (isLoading) {
@@ -19,10 +21,17 @@ const MyOrderPage = () => {
     navigate("/404");
   }
 
+  const orderCompletionHandler = () => {
+    mutate(data._id, {
+      onSuccess: () => refetch(),
+    });
+  };
+
   return (
     <div>
-      <div>
+      <div className="flex justify-between">
         <h2 className="text-3xl">اطلاعات سفارش</h2>
+        {data.status === "PENDING" && <Button text="تکمیل سفارش" onClick={orderCompletionHandler} />}
       </div>
       <div className="mt-4.5 flex flex-wrap gap-3 rounded-3xl text-xs max-sm:bg-white max-sm:py-6 sm:text-sm md:gap-6 md:text-base xl:gap-10">
         <div className="flex-1 basis-64 space-y-3 rounded-3xl bg-white px-8 sm:py-6 md:space-y-6">
@@ -31,7 +40,7 @@ const MyOrderPage = () => {
           <h4>
             وضعیت سفارش :
             <>
-              {data.status === "PENDING" && <span className="text-gray-500"> در انتظار پرداخت</span>}
+              {data.status === "PENDING" && <span className="text-gray-500"> در حال ارسال</span>}
               {data.status === "DELIVERED" && <span className="text-green-500"> تحویل داده شد</span>}
               {data.status === "CANCELLED" && <span className="text-red-500"> لغو شد</span>}
             </>
@@ -55,7 +64,7 @@ const MyOrderPage = () => {
             <div className="mx-auto size-28 shrink-0 overflow-hidden rounded-2xl bg-white lg:size-40">
               <Image cover={product.cover} />
             </div>
-            <div className="flex flex-1 items-start justify-between max-xs:mx-auto text-xs leading-relaxed sm:text-sm lg:py-4 md:text-base">
+            <div className="max-xs:mx-auto flex flex-1 items-start justify-between text-xs leading-relaxed sm:text-sm md:text-base lg:py-4">
               <div className="flex h-full flex-col justify-between max-sm:gap-2">
                 <Link to={`/product/${product.slug}`} className="line-clamp-2 h-10 flex-1 overflow-hidden">
                   {product.name}
@@ -66,13 +75,6 @@ const MyOrderPage = () => {
                 </div>
                 {discount != 0 && <h4 className="empty:hidden">{discount?.toLocaleString()}</h4>}
               </div>
-              {/* <div>
-                {data.status === "DELIVERED" && (
-                  <button className="border-primary text-primary hover:bg-primary cursor-pointer rounded border px-6 py-2 transition-colors duration-300 hover:text-white">
-                    ثبت دیدگاه
-                  </button>
-                )}
-              </div> */}
             </div>
           </div>
         ))}

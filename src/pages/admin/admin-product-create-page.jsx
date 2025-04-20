@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import Loading from "../../components/loading";
+import ImageUploadList from "../../features/admin/components/image-upload-list";
 import Input from "../../features/admin/components/input";
 import InputRadio from "../../features/admin/components/input-radio";
 import { useBrandList } from "../../hooks/useBrand";
 import { useCategoryList } from "../../hooks/useCategory";
 import { useCreateProduct } from "../../hooks/useProduct";
-import ImageUploadList from "../../features/admin/components/image-upload-list";
 import useTitle from "../../hooks/useTitle";
 
 const AdminProductCreatePage = () => {
+  console.log("mount");
   useTitle("پنل ادمین - ایجاد محصول");
   const { data: categories, isLoading: isLoadingCategory } = useCategoryList();
   const { data: brands, isLoading: isLoadingBrand } = useBrandList();
@@ -51,7 +52,6 @@ const AdminProductCreatePage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     images.forEach((image) => {
       formData.append("images", image.file);

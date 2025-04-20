@@ -22,8 +22,6 @@ const MyDashboardPage = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
-    console.log(user);
   };
 
   return (

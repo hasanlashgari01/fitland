@@ -115,6 +115,9 @@
 }
 
 @layer utilities {
+}
+
+@layer components {
   .btn {
     @apply cursor-pointer rounded border border-gray-300 px-4 py-1.5 disabled:cursor-not-allowed dark:border-gray-700;
   }
@@ -152,9 +155,7 @@
   .tab--active .tab__badge {
     @apply bg-primary;
   }
-}
 
-@layer components {
   .form-input {
     @apply mt-2 w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none;
   }
@@ -286,7 +287,7 @@
   clip-path: polygon(0 40%, 100% 0, 100% 100%, 0% 100%);
 }
 
-.skeleton *:not(:has(*)) {
+.skeleton *:not(:has(*)):not(.target), .skeleton .target {
   @apply animate-pulse rounded bg-gray-200 text-transparent;
 }
 

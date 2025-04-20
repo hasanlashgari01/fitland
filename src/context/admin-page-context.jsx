@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from "react";
-import { useSearchParams } from "react-router";
+import { createContext, useContext, useEffect, useState } from "react";
+import { useLocation, useSearchParams } from "react-router";
 
 const AdminPageContext = createContext();
 
@@ -19,7 +19,16 @@ const AdminPageProvider = ({ children }) => {
 };
 
 export const usePage = () => {
+  const location = useLocation();
+  const [prevPathname, setPrevPathname] = useState(location.pathname);
   const { page, isForm, setIsForm, isModal, setIsModal, selectedItem, setSelectedItem } = useContext(AdminPageContext);
+
+  useEffect(() => {
+    if (location.pathname !== prevPathname) {
+      cancelHandler();
+      setPrevPathname(location.pathname);
+    }
+  }, [location.pathname]);
 
   const showCreateFormHander = () => setIsForm(true);
 
@@ -34,6 +43,7 @@ export const usePage = () => {
   };
 
   const deleteHandler = ({ mutate, refetch, redirect }) => {
+    console.log(selectedItem)
     mutate(selectedItem);
     if (refetch) {
       setTimeout(() => {

@@ -67,6 +67,5 @@ export const useCategoryBySlug = (slug) => {
   return useQuery({
     queryKey: ["category", slug, isInventory, isOff, sort],
     queryFn: () => getCategoryBySlugService(slug, isInventory, isOff, sort),
-    // placeholderData: keepPreviousData,
   });
 };

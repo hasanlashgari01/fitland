@@ -11,7 +11,7 @@ const TabItem = ({ param, text, count = 0, defaultActive, isLoading }) => {
     >
       <div className="flex">
         <div className="text-tiny md:text-sm lg:text-base">{text}</div>
-        <div className={`tab__badge ${isLoading ? "fade-in" : ""}`}>{count}</div>
+        {!isNaN(count) && <div className={`tab__badge ${isLoading ? "fade-in" : ""}`}>{count}</div>}
       </div>
     </li>
   );

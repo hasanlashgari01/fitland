@@ -13,43 +13,39 @@ const AdminProductsPage = () => {
   const { data, isLoading, refetch } = useProducts(page);
   const { mutate: deleteMutate } = useDeleteProduct();
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (data.pagination.totalPage < page) {
-    return <h1>یافت نشد</h1>;
-  }
-
   return (
     <>
       <ProductHeader />
-      <table className="table-container mt-8 table-auto">
-        <thead>
-          <tr>
-            <th className="table-header w-16 text-center">عکس</th>
-            <th className="table-header w-96 text-center">عنوان</th>
-            <th className="table-header text-center">قیمت</th>
-            <th className="table-header text-center">تخفیف</th>
-            <th className="table-header text-center">موجودی</th>
-            <th className="table-header text-center">وضعیت</th>
-            <th className="table-header text-center">عملیات</th>
-          </tr>
-        </thead>
-        <tbody className="fade-in">
-          {data?.data?.length !== 0 &&
-            data?.data?.map((category) => <Product key={category._id} refetch={refetch} {...category} />)}
-        </tbody>
-      </table>
-      <Pagination data={data} />
-      <Modal title="حذف" body="آیا از حذف این دسته اطمینان دارید؟" isOpen={isModal} cancelHandler={cancelHandler}>
-        <button className="btn" onClick={cancelHandler}>
-          انصراف
-        </button>
-        <button className="delete-btn" onClick={() => deleteHandler({ mutate: deleteMutate, refetch })}>
-          حذف
-        </button>
-      </Modal>
+      {!isLoading && data.count != 0 && (
+        <>
+          <table className="table-container mt-8 table-auto">
+            <thead>
+              <tr>
+                <th className="table-header w-16 text-center">عکس</th>
+                <th className="table-header w-96 text-center">عنوان</th>
+                <th className="table-header text-center">قیمت</th>
+                <th className="table-header text-center">تخفیف</th>
+                <th className="table-header text-center">موجودی</th>
+                <th className="table-header text-center">وضعیت</th>
+                <th className="table-header text-center">عملیات</th>
+              </tr>
+            </thead>
+            <tbody className="fade-in">
+              {data?.data?.length !== 0 &&
+                data?.data?.map((category) => <Product key={category._id} refetch={refetch} {...category} />)}
+            </tbody>
+          </table>
+          <Pagination data={data} />
+          <Modal title="حذف" body="آیا از حذف این دسته اطمینان دارید؟" isOpen={isModal} cancelHandler={cancelHandler}>
+            <button className="btn" onClick={cancelHandler}>
+              انصراف
+            </button>
+            <button className="delete-btn" onClick={() => deleteHandler({ mutate: deleteMutate, refetch })}>
+              حذف
+            </button>
+          </Modal>
+        </>
+      )}
     </>
   );
 };
