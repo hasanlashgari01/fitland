@@ -43,7 +43,6 @@ export const usePage = () => {
   };
 
   const deleteHandler = ({ mutate, refetch, redirect }) => {
-    console.log(selectedItem)
     mutate(selectedItem);
     if (refetch) {
       setTimeout(() => {
